@@ -20,8 +20,10 @@ compatibility_date = "2023-08-11"
 #
 [vars]
 GITHUB_APP_ID = "1109399"
-GITHUB_ORGANIZATION_SLUG = "mamazilla"
+GITHUB_ORGANIZATION_SLUG = "idroulia"
 GITHUB_REPOSITORY_SLUG = "Mamazilla-MoodForFood"
 GITHUB_REPOSITORY_BRANCH = "main"
 CW_ALLOWED_ORIGINS = "https://mamazillafood.com,https://www.mamazillafood.com,http://127.0.0.1:4000"
 CW_DEBUG = "false"
+GITHUB_APP_PRIVATE_KEY = ""
+RECAPTCHA_SECRET_KEY = ""

@@ -11,7 +11,7 @@ import GitHub from './github';
 import { convertFormDataToObject, handlePlaceholders, objectToMarkdownTable } from './util';
 import { buildSchemaObject } from './validation';
 import Validator from './validator';
-//import { validateCaptcha } from './recaptcha';
+import { validateCaptcha } from './recaptcha';
 
 // Setting up our application:
 const app = new Hono();
@@ -80,15 +80,15 @@ app.post('/api/handle/form', async c => {
   const moderation = staticmanCommentsConfig?.moderation === 'true' || true;
   const fieldTransforms = staticmanCommentsConfig?.transforms || staticmanCommentsConfig?.fieldTransforms || {};
   const optionTransforms = staticmanCommentsConfig?.optionTransforms || {};
- // const recaptchaEnabled = staticmanCommentsConfig?.reCaptcha || false;
+ const recaptchaEnabled = staticmanCommentsConfig?.recaptcha || false;
 
-  // Validate recaptcha token
-  // if(recaptchaEnabled){
-  //   const validCaptcha = await validateCaptcha(body.token, env.RECAPTCHA_SECRET_KEY, shouldDebug);
-  //   if (!validCaptcha) {
-  //     return c.text('Invalid reCaptcha', 400);
-  //   }
-  // }
+  //Validate recaptcha token
+  if(recaptchaEnabled){
+    const validCaptcha = await validateCaptcha(body.token, env.RECAPTCHA_SECRET_KEY, shouldDebug);
+    if (!validCaptcha) {
+      return c.text('Invalid reCaptcha', 400);
+    }
+  }
 
   // Build input fields schema
   const fieldInputSchema = z.object(buildSchemaObject(allowedFields, requiredFields, fieldTransforms)).strict();
